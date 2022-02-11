@@ -12,18 +12,28 @@ class Headers:
 
 
 
-async def get_all_lo(token):
+async def get_all_lo(token,courseid):
     headers=Headers(token)
     async with aiohttp.ClientSession(headers=headers.get_header()) as session:
-         response=await session.get(API_LO.LO_ENDPOINT)
+         ENDPOINT=''
+         if courseid!=None:
+            ENDPOINT=API_LO.LO_ENDPOINT+"/"+courseid
+         else:
+            ENDPOINT=API_LO.LO_ENDPOINT
+         response=await session.get(ENDPOINT)
          json_data=await response.json()
          return json_data
 
 
-async def get_all_catalogs(token):
+async def get_all_catalogs(token,catalogid):
     headers=Headers(token)
     async with aiohttp.ClientSession(headers=headers.get_header()) as session:
-         response=await session.get(API_CATLOG.CATLOG_ENDPOINT)
+         ENDPOINT=''
+         if catalogid!=None:
+            ENDPOINT=API_CATLOG.CATLOG_ENDPOINT+"/"+catalogid
+         else:
+            ENDPOINT=API_CATLOG.CATLOG_ENDPOINT
+         response=await session.get(ENDPOINT)
          json_data=await response.json()
          return json_data
    

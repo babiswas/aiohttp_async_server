@@ -5,12 +5,14 @@ from Config.Config import OAUTH
 
 async def get_course(request):
    token=OAUTH.TOKEN
-   json_data=await get_all_lo(token)
+   courseid=request.match_info.get('courseid',None)
+   json_data=await get_all_lo(token,courseid)
    return web.json_response(json_data)
 
 
 async def get_catalog(request):
     token=OAUTH.TOKEN
-    json_data=await get_all_catalogs(token)
+    catalogid=request.match_info.get('catalogid',None)
+    json_data=await get_all_catalogs(token,catalogid)
     return web.json_response(json_data)
 
